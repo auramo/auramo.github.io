@@ -4,8 +4,8 @@ title: Vagrant performance tuning
 date: 2014-12-11 15:27:31
 ---
 
-The Vagrant setup I talk about in this post: OSX as the host system and VirtualBox as the
-provider.
+The Vagrant setup I talk about in this post: OSX as the host system, Ubuntu as
+guest and VirtualBox as the provider.
 
 I used to run Linux VMs on VirtualBox directly. Hunting down and hand-configuring
 images was a pain. I found out that Vagrant simplified things a lot for me.
@@ -38,16 +38,14 @@ Or just use the bridged mode which seems to be faster anyway. This is not an
 option in Vagrant, it requires eth0 to be a NAT interface. You can add another
 bridged interface but eth0 still has to be NAT.
 
-More details about paravirtualized network adapter: https://www.virtualbox.org/manual/ch06.html
+[More details about paravirtualized network adapter](https://www.virtualbox.org/manual/ch06.html). I also ended up [asking and answering my own question](http://superuser.com/questions/850357/how-to-fix-extremely-slow-virtualbox-network-download-speed/850389#850389) at Superuser.
 
-http://superuser.com/questions/850357/how-to-fix-extremely-slow-virtualbox-network-download-speed/850389#850389
-
-The second performance issue hit me with the shared folder which is accessible
-via /vagrant. If you have any large project or any builds running from the
+The second performance issue was with the shared folder which is accessible
+via */vagrant* on guest. If you have any large project or any builds running from the
 shared folder, you’ll bump into this issue. I noticed it when the my code’s
-tab completion was super slow. By default vagrant uses CIFS for the shared
-folder. To speed this up we can change this to use NFS instead. Add these
-lines to your Vagrantfile:
+tab completion appeared to be super slow. By default vagrant uses CIFS for the shared
+folder. To speed this up we can change this to use NFS instead. The solution was adding these
+lines to the Vagrantfile:
 
 {% highlight ruby %}
 config.vm.synced_folder ".", "/vagrant", type: "nfs"
@@ -55,5 +53,5 @@ config.vm.network "private_network", ip: "10.9.8.5"
 {% endhighlight %}
 
 The latter line is required by NFS, you’ll get an error without it. It creates
-a host-only network which is handy anyway, you can e.g. access your HTTP server
+a host-only network. This second interface will be handy anyway, you can e.g. access your HTTP server
 via that IP and skip port forwarding.
