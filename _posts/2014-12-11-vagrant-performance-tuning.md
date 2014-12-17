@@ -8,8 +8,8 @@ The Vagrant setup I talk about in this post: OSX as the host system, Ubuntu as
 guest and VirtualBox as the provider.
 
 I use a Macbook Pro as my work machine, but the
-environment requires pretty hard-core Linux-stuff related to building C++/Linux
-distros etc; hence I'm using multiple Linux virtual machines.
+environment requires Linux tools for building C/C++ apps and distros etc;
+hence I'm using multiple Linux virtual machines.
 
 I used to run Linux VMs on VirtualBox directly. Hunting down and hand-configuring
 images was a pain. I found out that Vagrant simplified things a lot for me.
