@@ -4,10 +4,12 @@ title: Vagrant performance tuning
 date: 2014-12-11 15:27:31
 ---
 
-I like the simplicity of Vagrant compared to hunting down random Virtual
-Machines and hand-configuring them. There is however some things which will bite
-you when you really start using it.
+This post is about this setup: OSX as the host system and VirtualBox as the
+provider.
 
+I used to run VirtualBox directly. Hunting down and hand-configuring VMs was a
+pain. Vagrant simplifies things a lot. There is however some things which will
+bite you when you really start using it.
 
 I'm using multiple Vagrant machines at my current job. I use OSX, but the
 environment has pretty hard-core Linux-stuff related to building C++/Linux
