@@ -32,9 +32,7 @@ Now the download speed improved to an acceptable rate, about 15x more than I had
 the default settings. If you’re using plain VirtualBox without Vagrant, switch
 the Adapter Type of your NAT interface from the GUI to [Paravirtualized network adapter](https://www.virtualbox.org/manual/ch06.html):
 
-*
-Paravirtualized network adapter (virtio-net)
-*
+    Paravirtualized network adapter (virtio-net)
 
 Or just use the bridged mode which seems to be faster anyway. This is not an
 option in Vagrant, it requires eth0 to be a NAT interface. You can add another
