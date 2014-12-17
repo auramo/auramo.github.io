@@ -4,18 +4,18 @@ title: Vagrant performance tuning
 date: 2014-12-11 15:27:31
 ---
 
-This post is about this setup: OSX as the host system and VirtualBox as the
+The Vagrant setup I talk about in this post: OSX as the host system and VirtualBox as the
 provider.
 
-I used to run VirtualBox directly. Hunting down and hand-configuring VMs was a
-pain. Vagrant simplifies things a lot. There is however some things which will
-bite you when you really start using it.
+I used to run Linux VMs on VirtualBox directly. Hunting down and hand-configuring
+images was a pain. I found out that Vagrant simplified things a lot for me.
+There are however some things which will bite you when you really start using it.
 
-I'm using multiple Vagrant machines at my current job. I use OSX, but the
-environment has pretty hard-core Linux-stuff related to building C++/Linux
+I'm using multiple Vagrant machines at my current job. I use a Macbook Pro, but the
+environment requires pretty hard-core Linux-stuff related to building C++/Linux
 distros etc.
 
-I had two pretty bad performance issues. The first one was that my network speed
+I ran into two pretty bad performance issues. The first one was that my network speed
 was pretty miserable, about 70 times slower than the host system.
 
 It turns out that the problem was with the VirtualBox NAT-interface and
@@ -26,7 +26,7 @@ made all the difference:
     v.customize ["modifyvm", :id, "--nictype1", "virtio"]
 {% endhighlight %}
 
-Now the download speed is at acceptable rate, about 15x more than I had with
+Now the download speed improved to an acceptable rate, about 15x more than I had with
 the default settings. If you’re using plain VirtualBox without Vagrant, switch
 the Adapter Type of your NAT interface from the GUI to:
 
@@ -35,7 +35,8 @@ the Adapter Type of your NAT interface from the GUI to:
 {% endhighlight %}
 
 Or just use the bridged mode which seems to be faster anyway. This is not an
-option in Vagrant, it requires eth0 to be a NAT interface.
+option in Vagrant, it requires eth0 to be a NAT interface. You can add another
+bridged interface but eth0 still has to be NAT.
 
 More details about paravirtualized network adapter: https://www.virtualbox.org/manual/ch06.html
 
