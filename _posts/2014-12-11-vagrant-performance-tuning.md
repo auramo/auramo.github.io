@@ -28,7 +28,7 @@ made all the difference:
 
 Now the download speed improved to an acceptable rate, about 15x more than I had with
 the default settings. If you’re using plain VirtualBox without Vagrant, switch
-the Adapter Type of your NAT interface from the GUI to:
+the Adapter Type of your NAT interface from the GUI to [Paravirtualized network adapter](https://www.virtualbox.org/manual/ch06.html):
 
 {% highlight ruby %}
 "Paravirtualized network adapter (virtio-net)"
@@ -38,7 +38,7 @@ Or just use the bridged mode which seems to be faster anyway. This is not an
 option in Vagrant, it requires eth0 to be a NAT interface. You can add another
 bridged interface but eth0 still has to be NAT.
 
-[More details about paravirtualized network adapter](https://www.virtualbox.org/manual/ch06.html). I also ended up [asking and answering my own question](http://superuser.com/questions/850357/how-to-fix-extremely-slow-virtualbox-network-download-speed/850389#850389) at Superuser.
+I also ended up [asking and answering my own question](http://superuser.com/questions/850357/how-to-fix-extremely-slow-virtualbox-network-download-speed/850389#850389) on Superuser about this.
 
 The second performance issue was with the shared folder which is accessible
 via */vagrant* on guest. If you have any large project or any builds running from the
