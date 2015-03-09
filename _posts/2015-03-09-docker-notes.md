@@ -13,17 +13,17 @@ Docker has pretty good documentation. What I'm trying to get across here is how 
 should approach a situation similar to mine: create a shareable, lightweight environment
 to be used by multiple developers.
 
-### Starting an interactive shell
+## Starting an interactive shell
 
 
 * How to
 * Beware, you'll have to freeze it as image to use the same situation again. 
 
-### Containers vs Images
+## Containers vs Images
 
 Talk about containers getting created on every command from outside.
 
-### Where does it all go?
+## Where does it all go?
 
 
 * Talk about /usr/lib/docker and how it fills up fast
@@ -31,7 +31,7 @@ Talk about containers getting created on every command from outside.
 
 Trick on how to clean up containers and images with list -q | grep | xargs
 
-### Using volumes
+## Using volumes
 
 * Should be performant
 
