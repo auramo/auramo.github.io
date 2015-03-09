@@ -34,5 +34,6 @@ Trick on how to clean up containers and images with list -q | grep | xargs
 ## Using volumes
 
 * Should be performant
-
+* Note, you can use multiple -v params
+* Host path must be absolute. Expand shell trick.
 
