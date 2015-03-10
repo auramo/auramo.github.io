@@ -23,8 +23,19 @@ to be used by multiple developers.
 
 Talk about containers getting created on every command from outside.
 
-## Where does it all go?
+When you make some changes, either interactively via shell, or by running commands,
+you'll get a new container when the command or shell session ends. As a result,
+you'll get a container. You'll have to commit that container into an image to use it later. 
 
+To do this, first, show the last container:
+
+    sudo docker ps -l
+
+From the output, you'll get a container ID (here 99a2ac75bbc3), then run commit:
+
+    sudo docker commit 99a2ac75bbc3 new-image-with-my-changes
+
+## Where does it all go?
 
 * Talk about /usr/lib/docker and how it fills up fast
 * Refer to using volumes later
@@ -36,4 +47,5 @@ Trick on how to clean up containers and images with list -q | grep | xargs
 * Should be performant
 * Note, you can use multiple -v params
 * Host path must be absolute. Expand shell trick.
+
 
