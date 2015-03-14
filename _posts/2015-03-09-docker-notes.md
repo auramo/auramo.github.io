@@ -86,6 +86,16 @@ dent in the universe, let's store a file to our image while we are in it:
 echo "foo" > /bar.txt
 ```
 
+## Clean rebuild
+
+Docker uses it's cache to see what commands needs to be run when you
+run build. This is faster and usually works ok. Sometimes you'll just
+want to do a clean build though. This can be done with this parameter:
+
+```
+--no-cache=true
+```
+
 ## Getting back
 
 Let's get outta here! Press ctrl-D and you're back in your host
@@ -184,12 +194,24 @@ the path in beforehand e.g. in a shell script (EXAMPLE HERE)
 
 ## Where does it all go?
 
-* Talk about /usr/lib/docker and how it fills up fast
-* Refer to using volumes later
+All the files in the Union File System, the stuff you install and work
+on which is not under a volume directory go to /usr/lib/docker on your
+host. This can grow quite large so if your disks gets full, check the
+directory.
 
-Trick on how to clean up containers and images with list -q | grep | xargs
+To free some space you can nuke all the containers with this:
 
-Skip cache to rebuild the image: --no-cache=true
+```sudo docker ps -aq | xargs sudo docker rm```
+
+And all the images with this:
+
+```sudo docker images -q | xargs sudo docker rmi```
+
+Of course you should only do that if all the state you need is in
+either in the Dockerfile or volumes. Otherwise do some more
+fine-grained deletions via checking the listings of the _ps_ and _images_ subcommands.
+
+
 
 
 
