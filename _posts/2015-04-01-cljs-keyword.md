@@ -1,4 +1,8 @@
-# Using keywords as functions for your own container in ClojureScript
+---
+layout: post
+title: Using keywords as functions for your own container in ClojureScript
+date: 2015-04-01 10:00:00
+---
 
 In Clojure and ClojureScript, a common, maybe even idiomatic way to access values from a map is using this form:
 
