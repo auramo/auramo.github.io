@@ -37,7 +37,7 @@ Ok, so Keyword implenents IFn which makes it a callable function. There are two 
         (-lookup ^not-native o k not-found)
 ```
 
-It turns out that get checks if the container (o) implements the ILookup protocol, it calls the ``-lookup`` methods on it. So what we need to do is create our own container type which implements that protocol. Let's try that out.
+It turns out that get checks if the container (o) implements the [ILookup protocol](https://github.com/clojure/clojurescript/blob/4eebd45bd82f40c8e656d97ee996ed91c48a3ec5/src/cljs/cljs/core.cljs#L391), it calls the ``-lookup`` methods on it. So what we need to do is create our own container type which implements that protocol. Let's try that out.
 
 ```
 (deftype EntryWrapper [data-map]
@@ -54,9 +54,46 @@ This code creates a new type EntryWrapper. It's pretty stupid: it wraps an ordin
 Now, because Keyword used get, and get used the ILookup methods, we should be able to fetch [key value] vectors like this:
 
 ```
-(:mykey entry-wrapper-instance)
+(def ew (EntryWrapper. {:a 1}))
+(:a ew)
+->
+[:a 1]
 ```
 
+Nice, but not that useful. Now let's try to implement something more interesting: a half-assed implementation of JavaScript-style prototype-based inheritance.
 
-ILookup
-https://github.com/clojure/clojurescript/blob/4eebd45bd82f40c8e656d97ee996ed91c48a3ec5/src/cljs/cljs/core.cljs#L4931
+
+```
+(declare proto-get)
+
+(deftype ProtoContainer [values proto]
+  ILookup
+  (-lookup
+    [o k] (proto-get (with-meta values {::proto proto}) k nil))
+  (-lookup [coll k not-found] (proto-get (with-meta values {::proto proto}) k not-found)))
+```
+Above we declared a function proto-get which we will implement later. Then we implemented a new type ProtoContainer which again implements the protocol ILookup. It also takes a map of values and a prototype as it's "constructor parameters". All the interesting stuff has been delegated to proto-get. Let's see what it does:
+
+```
+(defn- proto-get [values k not-found]
+  (if values
+    (if-let [v (get values k)]
+      v
+      (recur (::proto (meta values)) k not-found))
+    not-found))
+```
+Nice and simple, it just uses the get function to retrieve a value from the map of values. If it isn't there, the function calls itself recursively with the prototype of our map.
+
+(defn proto-container
+  ([values] (ProtoContainer. values nil))
+  ([values proto] (ProtoContainer. values proto)))
+
+
+;; ^ Make overloaded with base and without
+
+(def mci (ProtoContainer. {} {}))
+
+;; JuizContainer? :)
+
+(:jepa mci)
+```
