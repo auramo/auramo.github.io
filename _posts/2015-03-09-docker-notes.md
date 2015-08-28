@@ -7,12 +7,9 @@ date: 2015-03-09 21:20:00
 I've been playing with Docker lately. According to documentation It's
 most commonly used as a container for a single server-side process. My
 use-case is a bit different: trying to get a development environment
-running. The purpose is to create a shareable, lightweight environment
-to be used by multiple developers. This would be overkill for more
-single environments. Also, Vagrant might suit your purposes
-better. But if Vagrant is out of the question for some reason, and you have a
-hideously hard-to-setup Linux-based development environment, you can
-use Docker for it as well.
+running. Usually I'd use Vagrant for shared development environment
+configuration and implementation, but I ran into a case where it
+wasn't an option.
 
 My requirements were basically these:
 
@@ -147,7 +144,7 @@ sudo docker run -i -t image-with-bar-txt /bin/bash
 ```
 
 Now we can see our precious bar.txt again! This doesn't seem to be
-what I want to do every time I go back to my development "machine"
+what I want to do every time I go back to my development machine
 though.
 
 ## Volumes
