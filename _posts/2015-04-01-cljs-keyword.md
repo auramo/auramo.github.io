@@ -60,7 +60,7 @@ Now, because Keyword used get, and get used the ILookup methods, we should be ab
 [:a 1]
 ```
 
-Nice, but not that useful. Now let's try to implement something more interesting: a half-assed implementation of JavaScript-style prototype-based inheritance.
+Nice, but not that useful. Now let's try to do something more interesting: a half-assed implementation of JavaScript-style prototype-based inheritance.
 
 
 ```
