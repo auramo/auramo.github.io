@@ -96,11 +96,12 @@ has been delegated to proto-get. Let's see what it does:
 
 
 ```
-(defn- proto-get [values k not-found]
+(defn proto-get [values k not-found]
   (if values
-    (if-let [v (not (nil? (get values k)))]
-      v
-      (recur (::proto (meta values)) k not-found))
+      (let [v (get values k)]
+        (if (not (nil? v))
+            v
+          (recur (::proto (meta values)) k not-found)))
     not-found))
 ```
 
@@ -108,9 +109,11 @@ Nice and simple, it just uses the get function to retrieve a value
 from the map of values. If it isn't there, the function calls itself
 recursively with the prototype of our map.
 
+```
 (defn proto-container
   ([values] (ProtoContainer. values nil))
   ([values proto] (ProtoContainer. values proto)))
+```
 
 Now let's see if the inheritance works. _The following example is a variation
 of an example from Steve Yegge's [Universal Design Pattern
@@ -137,7 +140,7 @@ Now, Morris has an encounter with a nasty dog and starts hating dogs:
 (:name post-traumatic-morris)
 -> "Morris"
 (:likes-dogs post-traumatic-morris)
--> false (TODO doesn't work now :))
+-> false
 (:likes-dogs morris)
 -> true
 ```
