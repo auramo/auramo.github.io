@@ -133,7 +133,7 @@ Above we created a prototype ``cat`` and an instance of cat called
 ``morris``. In addition to the base properties ``:likes-dogs`` and
 ``:likes-other-cats`` Morris has a property called name.
 
-Now, Morris has an encounter with a nasty dog and starts hating dogs:
+Next Morris has an encounter with a nasty dog and starts hating dogs:
 
 ```
 (def post-traumatic-morris (proto-container {:likes-dogs false} morris))
