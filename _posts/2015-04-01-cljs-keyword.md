@@ -118,7 +118,7 @@ recursively with the prototype of our map.
 Now let's see if the inheritance works. _The following example is a variation
 of an example from Steve Yegge's [Universal Design Pattern
 article](http://steve-yegge.blogspot.fi/2008/10/universal-design-pattern.html)
-and [an example in the Joy of Clojure book in Chapter 9](http://www.joyofclojure.com/)._
+and an example in [the Joy of Clojure book](http://www.joyofclojure.com/) in Chapter 9._
 
 ```
 (def cat (proto-container {:likes-dogs true :likes-other-cats true}))
