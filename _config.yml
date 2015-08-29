@@ -1,7 +1,7 @@
 # Jekyll configuration
 
 name: Drive-by deprecator
-description: Auramo's blog
+description: Perttu Auramo's blog
 
 # url is currently only used only for the RSS feed in feed.xml
 url: http://auramo.github.io
