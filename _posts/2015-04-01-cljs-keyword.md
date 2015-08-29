@@ -147,4 +147,5 @@ Next Morris has an encounter with a nasty dog and starts hating dogs:
 
 As seen above, we were able to specialize a new Morris which has the
 same properties as original Morris except for the not liking dogs
-part.
+part. And we did it by using keywords as functions to retrieve data
+from our own custom type.
